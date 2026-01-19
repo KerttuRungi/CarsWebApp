@@ -13,6 +13,18 @@ builder.Services.AddScoped<ICarsService, CarsService>();
 builder.Services.AddDbContext<CarsDatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReact",
+        policy =>
+        {
+            policy
+            .AllowAnyHeader()
+                .AllowAnyMethod()
+                .WithOrigins("http://localhost:5173");
+
+        });
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -37,6 +49,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors("AllowReact");
 
 app.UseAuthorization();
 
