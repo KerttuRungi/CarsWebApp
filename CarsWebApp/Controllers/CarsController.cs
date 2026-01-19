@@ -61,5 +61,18 @@ namespace CarsWebApp.Controllers
 
             return Ok(result);
         }
+
+        //Delete
+        [HttpDelete("{Id:guid}")]
+        public async Task<IActionResult> DeleteAsync(Guid Id,[FromBody] CarsDto dto)
+        {
+            dto.Id = Id;
+            var deleted = await _carsService.DeleteAsync(dto);
+
+            if (deleted == null)
+                return NotFound(new { message = "Car not found." });
+            return Ok(deleted);
+        }
+
     }
 }

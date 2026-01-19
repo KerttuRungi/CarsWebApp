@@ -77,6 +77,29 @@ namespace Cars.ApplicationServices.Services
                 ModifiedAt = DateTime.Now,
             };
         }
+        public async Task<CarsDto> DeleteAsync(CarsDto dto)
+        {
+            var car = await _context.Cars
+                .FirstOrDefaultAsync(c => c.Id == dto.Id);
+
+            if (car == null)
+            {
+                return null;
+            }
+            _context.Cars.Remove(car);
+            await _context.SaveChangesAsync();
+            return new CarsDto
+            {
+                Id = car.Id,
+                Brand = car.Brand,
+                Color = car.Color,
+                Model = car.Model,
+                Year = car.Year,
+                CreatedAt = car.CreatedAt,
+                ModifiedAt = car.ModifiedAt,
+            };
+        }
+
         public async Task<IEnumerable<CarsDto>> GetAll()
         {
             return await _context.Cars
