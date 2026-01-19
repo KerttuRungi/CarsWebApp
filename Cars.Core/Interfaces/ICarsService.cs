@@ -12,5 +12,6 @@ namespace Cars.Core.Interfaces
     {
         Task<IEnumerable<CarsDto>> GetAll();
         Task<CarsDto> CreateAsync(CarsDto dto);
+        Task<CarsDto> UpdateAsync(CarsDto dto);
     }
 }

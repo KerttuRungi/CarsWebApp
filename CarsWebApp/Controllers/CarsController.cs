@@ -48,5 +48,18 @@ namespace CarsWebApp.Controllers
 
             return Ok(result);
         }
+
+        //Update
+        [HttpPut]
+        public async Task<IActionResult> Update(Guid Id,[FromBody] CarsDto dto)
+        {
+            dto.Id = Id;
+            var result = await _carsService.UpdateAsync(dto);
+
+            if (result == null)
+                return BadRequest("Could not update a car");
+
+            return Ok(result);
+        }
     }
 }

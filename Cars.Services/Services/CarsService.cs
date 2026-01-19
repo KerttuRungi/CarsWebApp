@@ -49,6 +49,34 @@ namespace Cars.ApplicationServices.Services
             };
 
         }
+        public async Task<CarsDto> UpdateAsync(CarsDto dto)
+        {
+            var car = await _context.Cars.FindAsync(dto.Id);
+
+            if (car == null)
+            {
+                throw new Exception("Car not found");
+            }
+
+            car.Brand = dto.Brand;
+            car.Color = dto.Color;
+            car.Model = dto.Model;
+            car.Year = dto.Year;
+            car.ModifiedAt = DateTime.Now;
+            _context.Cars.Update(car);
+            await _context.SaveChangesAsync();
+
+            return new CarsDto
+            {
+                Id = car.Id,
+                Brand = car.Brand,
+                Color = car.Color,
+                Model = car.Model,
+                Year = car.Year,
+                CreatedAt = car.CreatedAt,
+                ModifiedAt = DateTime.Now,
+            };
+        }
         public async Task<IEnumerable<CarsDto>> GetAll()
         {
             return await _context.Cars
