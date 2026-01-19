@@ -11,8 +11,10 @@ namespace Cars.Core.Interfaces
     public interface ICarsService
     {
         Task<IEnumerable<CarsDto>> GetAll();
+        Task<IEnumerable<CarsDto>> DetailAsync(Guid Id);
         Task<CarsDto> CreateAsync(CarsDto dto);
         Task<CarsDto> UpdateAsync(CarsDto dto);
         Task<CarsDto> DeleteAsync(CarsDto dto);
+
     }
 }

@@ -113,5 +113,20 @@ namespace Cars.ApplicationServices.Services
                  })
                  .ToListAsync();
         }
+
+        public async Task<IEnumerable<CarsDto>> DetailAsync(Guid Id)
+        {
+            return await _context.Cars
+                 .Where(c => c.Id == Id)
+                 .Select(c => new CarsDto
+                 {
+                     Id = c.Id,
+                     Brand = c.Brand,
+                     Color = c.Color,
+                     Model = c.Model,
+                     Year = c.Year,
+                 })
+                 .ToListAsync();
+        }
     }
 }
