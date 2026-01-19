@@ -20,5 +20,33 @@ namespace CarsWebApp.Controllers
             _carsService = carsService;
         }
 
+        //GET all
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var cars = await _carsService.GetAll();
+
+            return Ok(cars);
+        }
+        //GET by Id
+        [HttpGet("{Id:guid}")]
+        public async Task<IActionResult> GetById(Guid Id)
+        {
+            var cars = await _carsService.DetailAsync(Id);
+
+            return Ok(cars);
+        }
+
+        //Create
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CarsDto dto)
+        {
+            var result = await _carsService.CreateAsync(dto);
+
+            if (result == null)
+                return BadRequest("Could not create a car");
+
+            return Ok(result);
+        }
     }
 }

@@ -7,6 +7,7 @@ using Cars.Core.Dtos;
 using Cars.Core.Interfaces;
 using Cars.Data;
 using Cars.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cars.ApplicationServices.Services
 {
@@ -20,6 +21,46 @@ namespace Cars.ApplicationServices.Services
             )
         {
             _context = context;
+        }
+        public async Task<CarsDto> CreateAsync(CarsDto dto)
+        {
+            Car cars = new Car();
+
+            cars.Id = Guid.NewGuid();
+            cars.Brand = dto.Brand;
+            cars.Color = dto.Color;
+            cars.Model = dto.Model;
+            cars.Year = dto.Year;
+            cars.CreatedAt = DateTime.Now;
+            cars.ModifiedAt = DateTime.Now;
+
+            await _context.Cars.AddAsync(cars);
+            await _context.SaveChangesAsync();
+
+            return new CarsDto
+            {
+                Id = cars.Id,
+                Brand = cars.Brand,
+                Color = cars.Color,
+                Model = cars.Model,
+                Year = cars.Year,
+                CreatedAt = DateTime.Now,
+                ModifiedAt = DateTime.Now,
+            };
+
+        }
+        public async Task<IEnumerable<CarsDto>> GetAll()
+        {
+            return await _context.Cars
+                 .Select(c => new CarsDto
+                 {
+                     Id = c.Id,
+                     Brand = c.Brand,
+                     Color = c.Color,
+                     Model = c.Model,
+                     Year = c.Year,
+                 })
+                 .ToListAsync();
         }
     }
 }
