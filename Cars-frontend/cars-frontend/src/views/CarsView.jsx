@@ -55,6 +55,12 @@ export default function CarsView() {
                 <p className="text-gray-500">{car.year} • <span className="capitalize">{car.color}</span></p>
               </div>
 
+              <div className="flex gap-2">
+                 <Link 
+                to={`/details/${car.id}`}
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors shadow-md">
+                  Details
+                </Link>
                 <Link 
                   to={`/update/${car.id}`} 
                   className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-100 transition-colors font-medium">
