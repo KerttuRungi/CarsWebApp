@@ -9,6 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<CarsView />} />
         <Route path="/create" element={<CreateUpdateCar />} />
+        <Route path="/update/:id" element={<CreateUpdateCar />} />
       </Routes>
     </BrowserRouter>
   );

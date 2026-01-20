@@ -60,6 +60,11 @@ export default function CarsView() {
                 <p className="text-gray-500">{car.year} • <span className="capitalize">{car.color}</span></p>
               </div>
 
+                <Link 
+                  to={`/update/${car.id}`} 
+                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-100 transition-colors font-medium">
+                  Edit
+                </Link>
     </div>
   );
   }
