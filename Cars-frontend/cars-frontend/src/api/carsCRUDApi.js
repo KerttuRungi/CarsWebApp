@@ -24,5 +24,7 @@ export const updateCar = async (id, carDto) => {
 
 // DELETE 
 export const deleteCar = async (id) => {
-  return axios.delete(`${API_URL}/${id}`);
+  return axios.delete(`${API_URL}/${id}`, {
+    data: { id: id } 
+  });
 };
