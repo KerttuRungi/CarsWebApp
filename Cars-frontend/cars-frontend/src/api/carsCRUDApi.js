@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://localhost:7217/api/cars";
+const API_URL = "https://carswebapp20260124151948.azurewebsites.net/api/cars";
 
 // GET all cars
 export const getAllCars = async () => {

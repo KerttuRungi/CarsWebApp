@@ -21,7 +21,7 @@ builder.Services.AddCors(options =>
             policy
             .AllowAnyHeader()
                 .AllowAnyMethod()
-                .WithOrigins("http://localhost:5173");
+                .WithOrigins("https://carswebapp20260124151948.azurewebsites.net/");
 
         });
 });
@@ -30,6 +30,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<CarsDatabaseContext>();
+    if (dbContext.Database.IsRelational())
+    {
+        dbContext.Database.Migrate();
+    }
+}
 
 if (app.Environment.IsDevelopment())
 {
@@ -49,6 +58,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    endpoints.MapFallbackToFile("index.html");
+});
 
 app.UseCors("AllowReact");
 
