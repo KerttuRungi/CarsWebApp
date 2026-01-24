@@ -125,6 +125,8 @@ namespace Cars.ApplicationServices.Services
                      Color = c.Color,
                      Model = c.Model,
                      Year = c.Year,
+                     CreatedAt = c.CreatedAt,
+                     ModifiedAt = c.ModifiedAt,
                  })
                  .ToListAsync();
         }

@@ -49,6 +49,14 @@ export default function CarDetailsView() {
             <p className="bg-[#2d4648] border border-gray-900 text-sm rounded-lg block p-2.5">{car.year || "N/A"}</p>
           </div>
           <div>
+            <label className="block mb-2 text-sm font-bold">Created At</label>
+            <p className="bg-[#2d4648] border border-gray-900 text-sm rounded-lg block p-2.5">{car.createdAt ? new Date(car.createdAt).toLocaleString() : "N/A"}</p>
+          </div>
+          <div>
+            <label className="block mb-2 text-sm font-bold">Modified At</label>
+            <p className="bg-[#2d4648] border border-gray-900 text-sm rounded-lg block p-2.5">{car.modifiedAt ? new Date(car.modifiedAt).toLocaleString() : "N/A"}</p>
+          </div>
+          <div className="col-span-4 flex justify-start mt-4">
           <button
             type="button"
             className="bg-[#5F160D] hover:bg-[#a04c41] text-white px-4 py-2 rounded-md cursor-pointer"
